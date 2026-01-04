@@ -24,11 +24,19 @@ export const productType = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
-      name: 'image',
-      type: 'image',
-      title: 'Product Image',
-      options: { hotspot: true }, // Allows cropping in the UI
+      name: 'images',
+      type: 'array',
+      title: 'Product Images',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+        }
+      ],
+      description: 'The first image will be the primary thumbnail used on the home page.',
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'price',

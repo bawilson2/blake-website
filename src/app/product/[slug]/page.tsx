@@ -2,6 +2,7 @@
 import { client, urlFor } from "@/sanity/client";
 import { notFound } from "next/navigation";
 import { createCheckoutSession } from "@/app/actions/stripe";
+import ImageGallery from "@/components/image-gallery";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -15,21 +16,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <main className="max-w-6xl mx-auto p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-start">
-      {/* Product Image Container */}
-      <div className="relative aspect-square rounded-3xl overflow-hidden bg-transparent flex items-center justify-center border border-slate-200/10 dark:border-white/5">
-        {/* Optional: Subtle Spotlight behind image */}
-        <div className="absolute inset-0 bg-gradient-radial from-blue-500/10 to-transparent pointer-events-none" />
-        
-        {product.image && (
-          <img 
-            src={urlFor(product.image).width(1000).url()} 
-            alt={product.name}
-            /* Changed to object-contain so maker projects aren't cropped, 
-               and removed the white bg to let the grid show through */
-            className="relative z-10 w-full h-full object-contain p-4 transition-transform duration-500 hover:scale-105"
-          />
-        )}
-      </div>
+      {/* Left Side: Image Gallery */}
+      <ImageGallery images={product.images} />
 
       {/* Product Details Section - Glassmorphism Card */}
       <div className="flex flex-col gap-6 p-8 rounded-3xl bg-white/5 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/10 dark:border-white/10 shadow-xl">

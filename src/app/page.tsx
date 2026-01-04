@@ -31,9 +31,9 @@ export default async function Home() {
           >
             {/* Image Container - Transparent to show blueprint grid */}
             <div className="aspect-[4/5] relative overflow-hidden bg-transparent p-4">
-              {product.image && (
+              {product.images[0] && (
                 <img 
-                  src={urlFor(product.image).width(600).url()} 
+                  src={urlFor(product.images[0]).width(600).url()} 
                   alt={product.name} 
                   /* Changed to object-contain so projects like the Skylark aren't cropped */
                   className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out"
